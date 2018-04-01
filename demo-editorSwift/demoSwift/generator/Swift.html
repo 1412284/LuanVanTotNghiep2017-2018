@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Generating JavaScript</title>
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../blocks_compressed.js"></script>
+  
+      <script type="text/javascript" src="../../generators/Swift.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/logic.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/colour.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/lists.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/loops.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/math.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/procedures.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/text.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/variables.js"></script>
+
+  
+    <script type="text/javascript" src="../../msg/js/en.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+      pre {
+          font-size: 10px;
+          border: 1px solid #aaa;
+          margin: 0 0 20px 0;
+          padding: 10px;
+          height: 300px;
+      }
+
+      p.label {
+          margin: 5px 0
+      }
+
+      .demo {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+      }
+
+      .demo > div {
+          flex: 1 1
+      }
+
+      select {
+          margin-bottom: 10px;
+      }
+    </style>
+</head>
+<body>
+  <p>This is a simple demo of generating code Swift from blocks.</p>
+  <p>
+    <button onclick="showCode()">Show Swift</button>
+  </p>
+  <div id="blocklyDiv" style="height: 480px; width: 600px; float:left"></div>
+  <div  style="height: 480px; width: 600px; float:right">
+    <p>Code Swift</p>
+    <pre id ="swift">kjjhiujhiu</pre>
+  </div>
+  <xml id="toolbox" style="display: none">
+    <category name="Logic">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+    <category name="Math">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+    </category>
+    <category name="Text">
+      <block type="text"></block>
+      <block type="text_length"></block>
+      <block type="text_print"></block>
+    </category>
+  </xml>
+
+  <xml id="startBlocks" style="display: none">
+    <block type="controls_if" inline="false" x="20" y="20">
+      <mutation else="1"></mutation>
+      <value name="IF0">
+        <block type="logic_compare" inline="true">
+          <field name="OP">EQ</field>
+          <value name="A">
+            <block type="math_arithmetic" inline="true">
+              <field name="OP">MULTIPLY</field>
+              <value name="A">
+                <block type="math_number">
+                  <field name="NUM">6</field>
+                </block>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <field name="NUM">7</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <value name="B">
+            <block type="math_number">
+              <field name="NUM">42</field>
+            </block>
+          </value>
+        </block>
+      </value>
+      <statement name="DO0">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Don't panic</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+      <statement name="ELSE">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Panic</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </xml>
+  <script>
+        Blockly.inject(document.getElementById('blocklyDiv'),
+        {path: '../../', toolbox: document.getElementById('toolbox')});
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace,
+        document.getElementById('startBlocks'));
+        document.getElementById('swift').innerText = Blockly.Swift.workspaceToCode()
+    function showCode() {
+      // Generate JavaScript code and display it.
+      var code = Blockly.Swift.workspaceToCode();
+       document.getElementById('swift').innerText = Blockly.Swift.workspaceToCode()
+      alert(code);
+    }
+  </script>
+
+</body>
+</html>
