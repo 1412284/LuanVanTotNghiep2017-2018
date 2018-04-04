@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<title> Example </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+	<script type="text/javascript" src="vendor/bootstrap.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<link rel="stylesheet" href="vendor/bootstrap.css">
+ 	<link rel="stylesheet" href="index.css">
+
+    <script type="text/javascript" src="../../blockly_compressed.js"></script>
+    <script type="text/javascript" src="../../blocks_compressed.js"></script>
+  
+      <script type="text/javascript" src="../../generators/Swift.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/logic.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/colour.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/lists.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/loops.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/math.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/procedures.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/text.js"></script>
+      <script type="text/javascript" src="../../generators/Swift/variables.js"></script>
+    <script type="text/javascript" src="../../msg/js/en.js"></script>
+    <style>
+    body {
+      background-color: rgb(215, 209, 208);
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+      pre {
+          font-size: 10px;
+          border: 1px solid #aaa;
+          margin: 0 0 0 0;
+          padding: 10px;
+          height: 480px;
+      }
+    </style>
+</head>
+<body >
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+    	<div class="container">
+    		<!-- Brand and toggle get grouped for better mobile display -->
+    		<div class="navbar-header">
+    			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    				<span class="sr-only">Toggle navigation</span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    			</button>
+    			<a class="navbar-brand" href="#">Get Starter</a>
+    		</div>
+    
+    		<!-- Collect the nav links, forms, and other content for toggling -->
+    		<div class="collapse navbar-collapse navbar-ex1-collapse">
+    			<ul class="nav navbar-nav">
+    				<li class="active"><a href="#"><b>blockly ios</b></a></li>
+    				<li><a href="#"><b>forum</b></a></li>
+    			</ul>
+    		</div><!-- /.navbar-collapse -->
+    	</div>
+    </nav>
+    <div class="container">
+    	<div class="row">
+    		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 thumbnail">
+                <h3 style="text-align: center;">blockly</h3>
+                <div id="blocklyDiv" style="height: 450px; float:left"></div>
+                <button type="button" class="btn btn-success" style="float: right;" onclick="showCode()">Run</button>
+    		</div>
+    		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail">
+    			<h3 style="text-align: center;">Swift</h3>
+                 <pre id ="swift"></pre>
+    		</div>
+    	</div>
+    </div>
+     <xml id="toolbox" style="display: none">
+    <category name="Logic">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+    <category name="Math">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+    </category>
+    <category name="Text">
+      <block type="text"></block>
+      <block type="text_length"></block>
+      <block type="text_print"></block>
+    </category>
+  </xml>
+
+  <xml id="startBlocks" style="display: none">
+    <block type="controls_if" inline="false" x="20" y="20">
+      <mutation else="1"></mutation>
+      <value name="IF0">
+        <block type="logic_compare" inline="true">
+          <field name="OP">EQ</field>
+          <value name="A">
+            <block type="math_arithmetic" inline="true">
+              <field name="OP">MULTIPLY</field>
+              <value name="A">
+                <block type="math_number">
+                  <field name="NUM">6</field>
+                </block>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <field name="NUM">7</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <value name="B">
+            <block type="math_number">
+              <field name="NUM">42</field>
+            </block>
+          </value>
+        </block>
+      </value>
+      <statement name="DO0">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Don't panic</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+      <statement name="ELSE">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Panic</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </xml>
+     <script>
+        Blockly.inject(document.getElementById('blocklyDiv'),
+        {path: '../../', toolbox: document.getElementById('toolbox')});
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace,
+        document.getElementById('startBlocks'));
+        document.getElementById('swift').innerText = Blockly.Swift.workspaceToCode()
+    function showCode() {
+      // Generate JavaScript code and display it.
+      var code = Blockly.Swift.workspaceToCode();
+       document.getElementById('swift').innerText = Blockly.Swift.workspaceToCode()
+      alert(code);
+    }
+  </script>
+
+</body>
+</html>
