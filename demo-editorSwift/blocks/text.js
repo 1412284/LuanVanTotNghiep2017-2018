@@ -567,6 +567,35 @@ Blockly.Blocks['text_print'] = {
     this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
   }
 };
+Blockly.Blocks['text_write'] = {
+  /**
+   * Block for print statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.TEXT_PRINT_HELPURL);
+    this.setColour(160);
+    this.interpolateMsg(Blockly.Msg.TEXT_PRINT_TITLE,
+                        ['TEXT', null, Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
+  }
+};
+
+
+Blockly.Blocks['text_number'] = {
+  init: function() {
+    this.appendValueInput("input")
+        .setCheck("Number")
+        .appendField("number");
+    this.setInputsInline(true);
+    this.setColour(65);
+ this.setTooltip("");
+ this.setHelpUrl("customer");
+  }
+}; 
 
 Blockly.Blocks['text_prompt'] = {
   /**
