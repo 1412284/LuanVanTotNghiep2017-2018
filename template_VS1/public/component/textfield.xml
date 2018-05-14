@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+ <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ANB-tG-n2Z">
+          <rect key="frame" x="56" y="148" width="97" height="30"/>
+          <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+          <nil key="textColor"/>
+          <fontDescription key="fontDescription" type="system" pointSize="14"/>
+          <textInputTraits key="textInputTraits"/>
+        </textField>
